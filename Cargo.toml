@@ -1,0 +1,11 @@
+[package]
+name = "oddio-engine_test"
+version = "0.1.0"
+authors = ["DasEtwas"]
+edition = "2018"
+
+[dependencies]
+oddio = { git = "https://github.com/Ralith/oddio", rev = "f6214f03768f8cc91c47693ade4d5d6f4fba2f91" }
+cpal = "0.13.1"
+wav = "0.5.0"
+oddio-engine = { git = "https://github.com/DasEtwas/oddio-engine", rev = "64a00f86268263163f8affa62dcf76864f45e226" }
