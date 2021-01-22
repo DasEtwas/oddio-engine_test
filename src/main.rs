@@ -85,7 +85,7 @@ fn main() {
         .unwrap();
 
     let (engine_signal, mut release_engine_handle, mut throttle_engine_handle) = {
-        let release_rpms = [3900, 5100, 7440, 8520, 9180, 10020, 10500];
+        let release_rpms = [1000, 1049, 1198, 1446, 1793, 2239, 2785, 3429, 4173, 5016, 7000];
 
         let release_engine = Engine::new(
             3900.0,
@@ -93,7 +93,7 @@ fn main() {
             release_rpms.iter().map(|&rpm| {
                 (rpm as f32, 0.003, {
                     let (header, data) = read_wav_f32(format!(
-                        "canyoncar/Engine/loop_{}Rpm_release_engine.wav",
+                        "loops/engine/loop_{}Rpm_release_body.wav",
                         rpm
                     ));
 
@@ -102,15 +102,15 @@ fn main() {
             }),
         );
 
-        let throttle_rpms = [5280, 7380, 8520, 9180, 9600, 10500, 11520];
+        let throttle_rpms =  [1000, 1049, 1198, 1446, 1793, 2239, 2785, 3429, 4173, 5016, 7000];
 
         let throttle_engine = Engine::new(
-            3900.0,
-            0.1,
+            1000.0,
+            0.01,
             throttle_rpms.iter().map(|&rpm| {
                 (rpm as f32, 0.003, {
                     let (header, data) = read_wav_f32(format!(
-                        "canyoncar/Engine/loop_{}Rpm_throttle_engine.wav",
+                        "loops/engine/loop_{}Rpm_throttle_body.wav",
                         rpm
                     ));
 
@@ -164,7 +164,7 @@ fn main() {
             .set_motion([position, 0.0, -8.0].into(), [velocity, 0.0, 0.0].into());
 
         let phase = (elapsed.as_secs_f32() / 10.0 + 0.75).rem_euclid(1.0) * PI * 2.0;
-        let rpm = 3800.0 + (phase.sin() * 0.5 + 0.5) * 10000.0;
+        let rpm = 800.0 + (phase.sin() * 0.5 + 0.5) * 8000.0;
 
         let shift = -0.5;
         let mix = (phase + (phase + shift).cos() * 0.8 + shift).cos() * 0.5 + 0.5;
